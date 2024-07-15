@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "886568607353",
+    "project_id": "hfmatrimony-4a4ed",
+    "storage_bucket": "hfmatrimony-4a4ed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:886568607353:android:1a013682db4933bfa33ea8",
+        "android_client_info": {
+          "package_name": "com.heavenlymatrimony.heavenlymatrimony"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWjaXsVTf3DUGPzjUsJv_zsD3cwA8wQq8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

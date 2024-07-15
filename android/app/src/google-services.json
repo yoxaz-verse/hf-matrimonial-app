@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "886568607353",
+    "project_id": "hfmatrimony-4a4ed",
+    "storage_bucket": "hfmatrimony-4a4ed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:886568607353:android:1a013682db4933bfa33ea8",
+        "android_client_info": {
+          "package_name": "com.heavenlymatrimony.heavenlymatrimony"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "886568607353-7c1iu9nacvn1u6uk0mu51mlftldkom9f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.heavenlymatrimony.heavenlymatrimony",
+            "certificate_hash": "9a142ed608ad076f3420e372efe803065947bc7f"
+          }
+        },
+        {
+          "client_id": "886568607353-7n31jbsuvt081sbcgglm7cq3evuktkmm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWjaXsVTf3DUGPzjUsJv_zsD3cwA8wQq8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "886568607353-7n31jbsuvt081sbcgglm7cq3evuktkmm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "886568607353-5is4ntmn8q1a6e8nqc353e25cclug33s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.heavenlymatrimony.heavenlymatrimony"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
