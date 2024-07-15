@@ -377,8 +377,8 @@ class ApiClient {
             content: map["error"] ?? response.reasonPhrase.toString(),
             color: AppColors.red.withOpacity(0.7),
             textclr: AppColors.white);
-        log("response.reasonPhrase=-=- ${response.reasonPhrase} ");
-        return null;
+        log("response.reasonPhrase=-==- ${response.reasonPhrase} ");
+        return builder(responseString);
       }
     } catch (e) {
       DialogServiceV1().showSnackBar(

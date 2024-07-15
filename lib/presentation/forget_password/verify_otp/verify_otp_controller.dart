@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:heavenlymatrimony/application/account/account_service.dart';
 import 'package:heavenlymatrimony/data/shared_pref/shared_pref.dart';
+import 'package:heavenlymatrimony/presentation/login%20page/login_page.dart';
 import 'package:heavenlymatrimony/utils/common_components/common_text.dart';
 import 'package:heavenlymatrimony/utils/globals.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:pinput/pinput.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
 import '../../../application/dialog/dialog_service.dart';
 import '../../../application/otp/otp_service.dart';
 import '../../../application/validate/validate.dart';
 import '../../../utils/color.dart';
-import '../../login page/login_page.dart';
 
 part 'verify_otp_controller.g.dart';
 
@@ -59,6 +60,7 @@ class VerifyOtpController extends _$VerifyOtpController {
     );
     state = const AsyncValue.data(null);
   }
+
   Future<void> onVerifyTap(BuildContext context) async {
     state = const AsyncLoading();
     _isSubmit = true;
@@ -66,7 +68,6 @@ class VerifyOtpController extends _$VerifyOtpController {
       _isLoading = true;
       _verifyResponse =
           await ref.read(otpServiceProvider).verifyForgetPasswordOtp(
-
                 phoneNumber: "",
                 email: emailIdController.text,
                 phoneOtp: "",
@@ -103,6 +104,7 @@ class VerifyOtpController extends _$VerifyOtpController {
     }
     state = const AsyncValue.data(null);
   }
+
   Future<void> onDoneTap() async {
     state = const AsyncLoading();
     _isLoading = true;
@@ -112,11 +114,10 @@ class VerifyOtpController extends _$VerifyOtpController {
             email: emailIdController.text,
             password: newPasswordController.text,
             authtoken: "");
-
-    if (forgetPasswordResponse != null) {
+    if (forgetPasswordResponse?["data"] != null) {
       DialogServiceV1().showSnackBar(
-          content: "Password reset Successfully",
-          color: AppColors.colorPrimary.withOpacity(0.7),
+          content: "Password Changed Successfully!!!",
+          color: AppColors.black,
           textclr: AppColors.white);
       Navigator.pushAndRemoveUntil(
           Globals.navigatorKey.currentContext!,
@@ -125,6 +126,11 @@ class VerifyOtpController extends _$VerifyOtpController {
               type: PageTransitionType.fade,
               duration: const Duration(milliseconds: 400)),
           (Route<dynamic> route) => false);
+    } else if (forgetPasswordResponse?["error"] != null) {
+      DialogServiceV1().showSnackBar(
+          content: forgetPasswordResponse!["error"].toString(),
+          color: AppColors.black,
+          textclr: AppColors.white);
     } else {
       DialogServiceV1().showSnackBar(
           content:

@@ -1,16 +1,14 @@
-
-
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:heavenlymatrimony/presentation/dialog/addOtherDetail/add_other_detail_dialogue.dart';
 import 'package:heavenlymatrimony/presentation/dialog/areYouSureDialogue/are_you_sure_dialogue.dart';
 import 'package:heavenlymatrimony/presentation/dialog/loader_dialogue.dart';
 import 'package:heavenlymatrimony/presentation/dialog/select_gender/select_gender_dialog.dart';
 import 'package:heavenlymatrimony/presentation/dialog/userNotSubscribedDialogue/not_subscribed.dart';
 import 'package:heavenlymatrimony/utils/color.dart';
+import 'package:heavenlymatrimony/utils/common_components/common_text.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../utils/globals.dart';
@@ -18,7 +16,6 @@ import '../../presentation/br_detail/br_detail_controller.dart';
 import '../../presentation/deleteAccount/mailId/check_your_mail.dart';
 import '../../presentation/dialog/dialog_screen.dart';
 import '../../presentation/dialog/search_partner_dialog/search_partner_dialog.dart';
-
 import '../../presentation/registration page/registration_page_controller.dart';
 import '../../utils/common_components/common_image_picker.dart';
 
@@ -40,23 +37,23 @@ abstract class DialogService {
     required ImagePicker picker,
     required void Function(File file) pickedImage,
   });
-  Future<void> selectGenderDialog({required void Function(String selectedGenderId) onSubmit,required RegistrationPageController Function() controller});
+  Future<void> selectGenderDialog(
+      {required void Function(String selectedGenderId) onSubmit,
+      required RegistrationPageController Function() controller});
   Future<void> singleButtonDialog({
     required String titleText,
     required String subtitleText,
     required String buttonText,
     required void Function() onYesPressed,
-
   });
 
-  Future<void> areYouSureDialogue({
-    required String titleText,
-    required String subtitleText,
-    required String yesText,
-    required String noText,
-    required void Function() onYesPressed,
-    required void Function() onNoPressed
-  });
+  Future<void> areYouSureDialogue(
+      {required String titleText,
+      required String subtitleText,
+      required String yesText,
+      required String noText,
+      required void Function() onYesPressed,
+      required void Function() onNoPressed});
 
   // Future<bool> handleLocationPermission();
   //
@@ -101,40 +98,52 @@ class DialogServiceV1 implements DialogService {
           return CheckYourMail();
         }));
   }
-  @override
 
-  Future<void> readMoreTestimony({String text="", Widget? ImageWidget} ) async {
+  @override
+  Future<void> readMoreTestimony(
+      {String text = "", Widget? ImageWidget}) async {
     return (await showDialog(
         context: Globals.navigatorKey.currentContext!,
         barrierDismissible: true,
         builder: (BuildContext context) {
-          return DialogScreen(description: text,ImageWidget: ImageWidget,);
+          return DialogScreen(
+            description: text,
+            ImageWidget: ImageWidget,
+          );
         }));
   }
 
   @override
-  Future<void> searchPartner({required BrDetailController Function() controller}) async {
+  Future<void> searchPartner(
+      {required BrDetailController Function() controller}) async {
     return (await showDialog(
         context: Globals.navigatorKey.currentContext!,
         barrierDismissible: true,
         builder: (BuildContext context) {
-          return  SearchPartnerDialogScreen(controller: controller,);
+          return SearchPartnerDialogScreen(
+            controller: controller,
+          );
         }));
   }
+
   @override
-  Future<void> selectGenderDialog({required void Function(String selectedGenderId) onSubmit,required RegistrationPageController Function() controller}) async {
+  Future<void> selectGenderDialog(
+      {required void Function(String selectedGenderId) onSubmit,
+      required RegistrationPageController Function() controller}) async {
     return (await showDialog(
         context: Globals.navigatorKey.currentContext!,
         barrierDismissible: true,
         builder: (BuildContext context) {
-          return  SelectGenderDialog(onSubmit: onSubmit,controller: controller,);
+          return SelectGenderDialog(
+            onSubmit: onSubmit,
+            controller: controller,
+          );
         }));
   }
 
-
-
   @override
-  Future<void> AddOtherDetailDialogue({required void Function(String selectedGenderId) onSubmit}) async {
+  Future<void> AddOtherDetailDialogue(
+      {required void Function(String selectedGenderId) onSubmit}) async {
     return (await showDialog(
         context: Globals.navigatorKey.currentContext!,
         barrierDismissible: false,
@@ -164,30 +173,30 @@ class DialogServiceV1 implements DialogService {
     required String titleText,
     required String subtitleText,
     required String buttonText,
-     String? keyId,
+    String? keyId,
     bool? barrierDismiss,
     bool? barrierTransperent,
     bool? backButtonCanDismiss,
-
     required void Function() onYesPressed,
-
   }) async {
     return (await showDialog(
-barrierColor: barrierTransperent ==true ?Colors.transparent:null,
-routeSettings: RouteSettings(name: keyId),
+        barrierColor: barrierTransperent == true ? Colors.transparent : null,
+        routeSettings: RouteSettings(name: keyId),
         context: Globals.navigatorKey.currentContext!,
-        barrierDismissible: barrierDismiss??true,
+        barrierDismissible: barrierDismiss ?? true,
         builder: (BuildContext context) {
           return SingleButtonDialogue(
-            backButtonCanDismiss: backButtonCanDismiss??true,
+            backButtonCanDismiss: backButtonCanDismiss ?? true,
             titleText: titleText,
-keyId: keyId,
-key: Key(keyId??""),
+            keyId: keyId,
+            key: Key(keyId ?? ""),
             onYesPressed: onYesPressed,
-            subtitleText: subtitleText, buttonText: buttonText,
+            subtitleText: subtitleText,
+            buttonText: buttonText,
           );
         }));
   }
+
   @override
   Future<void> loaderDialogue() async {
     return (await showDialog(
@@ -197,26 +206,28 @@ key: Key(keyId??""),
           return const LoaderDialogue();
         }));
   }
+
   @override
-  Future<void> areYouSureDialogue({
-  bool? barriertransperent,
-  required String titleText,
-    required String subtitleText,
-    required String yesText,
-    required String noText,
-    required void Function() onYesPressed,
-    required void Function() onNoPressed
-  }) async {
+  Future<void> areYouSureDialogue(
+      {bool? barriertransperent,
+      required String titleText,
+      required String subtitleText,
+      required String yesText,
+      required String noText,
+      required void Function() onYesPressed,
+      required void Function() onNoPressed}) async {
     return (await showDialog(
         context: Globals.navigatorKey.currentContext!,
         barrierDismissible: true,
-        barrierColor: barriertransperent==true?AppColors.transparent:null,
+        barrierColor: barriertransperent == true ? AppColors.transparent : null,
         builder: (BuildContext context) {
           return AreYouSureDialogue(
-            noText: noText,yesText: yesText,
+            noText: noText,
+            yesText: yesText,
             onNoPressed: onNoPressed,
             onYesPressed: onYesPressed,
-            subtitleText: subtitleText, titleText: titleText,
+            subtitleText: subtitleText,
+            titleText: titleText,
           );
         }));
   }
@@ -345,14 +356,53 @@ key: Key(keyId??""),
     if (Globals.navigatorKey.currentContext == null) {
       return;
     }
-    Fluttertoast.cancel();
-    Fluttertoast.showToast(
-        msg: content,
-        backgroundColor: color,
-        textColor: textclr,
-        fontSize:
-            MediaQuery.of(Globals.navigatorKey.currentContext!).size.width *
-                0.03);
+
+    final context = Globals.navigatorKey.currentContext;
+    if (context == null) return;
+    final size = MediaQuery.of(context).size;
+    final height = size.height;
+    final snackBar = SnackBar(
+      backgroundColor: color,
+      content: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Text(
+              content,
+              style: juraTextStyle(
+                color: textclr,
+              ),
+            ),
+          ),
+          IconButton(
+            icon: Icon(Icons.close, color: textclr),
+            onPressed: () {
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+            },
+          ),
+        ],
+      ),
+      duration: const Duration(seconds: 3), // Duration to show the Snackbar
+      behavior: SnackBarBehavior
+          .floating, // Makes the Snackbar float above the bottom of the screen
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      margin: const EdgeInsetsDirectional.all(16),
+      padding: EdgeInsetsDirectional.all(height * 0.011),
+    );
+
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    // Fluttertoast.cancel();
+    // Fluttertoast.showToast(
+    //     toastLength: Toast.LENGTH_LONG,
+    //     msg: content,
+    //     backgroundColor: color,
+    //     textColor: textclr,
+    //     fontSize:
+    //         MediaQuery.of(Globals.navigatorKey.currentContext!).size.width *
+    //             0.03);
   }
 
   ///permissions

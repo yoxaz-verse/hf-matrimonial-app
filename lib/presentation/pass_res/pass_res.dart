@@ -95,7 +95,8 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
                             child: CommonText(
                               text: AppText.passwordreset,
                               style: juraTextStyle(
-                                  fontSize: h * 0.04, fontWeight: FontWeight.w700),
+                                  fontSize: h * 0.04,
+                                  fontWeight: FontWeight.w700),
                             ),
                           ),
                           SizedBox(
@@ -124,24 +125,27 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
                                     height: h * 0.02,
                                   ),
                                   Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(vertical: h * 0.01),
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: h * 0.01),
                                     child: TextInputField(
                                       hintText: AppText.emailhintText,
                                       counterStyle: juraTextStyle(
-                                          color: AppColors.black.withOpacity(0.1),
+                                          color:
+                                              AppColors.black.withOpacity(0.1),
                                           fontSize: h * 0.02,
                                           fontWeight: FontWeight.w400),
                                       errorText: controller().isSubmit == true
-                                          ? validateEmail(
-                                          controller().emailIdController.text)
+                                          ? validateEmail(controller()
+                                              .emailIdController
+                                              .text)
                                           : null,
                                       errorStyle: juraTextStyle(
                                           color: AppColors.red,
                                           fontSize: h * 0.02,
                                           fontWeight: FontWeight.w400),
                                       lableStyle: juraTextStyle(
-                                          color: AppColors.black.withOpacity(0.1),
+                                          color:
+                                              AppColors.black.withOpacity(0.1),
                                           fontSize: h * 0.02,
                                           fontWeight: FontWeight.w400),
                                       textstyle: juraTextStyle(
@@ -149,49 +153,57 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
                                           fontSize: h * 0.02,
                                           fontWeight: FontWeight.w400),
                                       titletextstyle: juraTextStyle(
-                                          color: AppColors.black.withOpacity(0.1),
+                                          color:
+                                              AppColors.black.withOpacity(0.1),
                                           fontSize: h * 0.02,
                                           fontWeight: FontWeight.w400),
                                       hintStyle: juraTextStyle(
-                                          color: AppColors.black.withOpacity(0.3),
+                                          color:
+                                              AppColors.black.withOpacity(0.3),
                                           fontSize: h * 0.02,
                                           fontWeight: FontWeight.w400),
-                                      controller: controller().emailIdController,
+                                      controller:
+                                          controller().emailIdController,
                                       keyboardType: TextInputType.text,
                                       containerwidth: w,
                                       boxShadow: [
                                         BoxShadow(
-                                          color: AppColors.black.withOpacity(0.2),
+                                          color:
+                                              AppColors.black.withOpacity(0.2),
                                           blurRadius: h * 0.1,
                                           blurStyle: BlurStyle.inner,
                                         )
                                       ],
                                       containercolor:
                                           AppColors.white.withOpacity(0.6),
-                                      textCapitalization: TextCapitalization.none,
+                                      textCapitalization:
+                                          TextCapitalization.none,
                                       borderRadius: BorderRadius.circular(10),
                                       underline: false,
                                     ),
                                   ),
                                   Padding(
-                                    padding:
-                                    EdgeInsets.symmetric(vertical: h * 0.01),
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: h * 0.01),
                                     child: TextInputField(
                                       hintText: AppText.enterCurrentPassword,
                                       counterStyle: juraTextStyle(
-                                          color: AppColors.black.withOpacity(0.1),
+                                          color:
+                                              AppColors.black.withOpacity(0.1),
                                           fontSize: h * 0.02,
                                           fontWeight: FontWeight.w400),
                                       errorText: controller().isSubmit == true
-                                          ? validatePassword(
-                                          controller().currentPasswordController.text)
+                                          ? validatePassword(controller()
+                                              .currentPasswordController
+                                              .text)
                                           : null,
                                       errorStyle: juraTextStyle(
                                           color: AppColors.red,
                                           fontSize: h * 0.02,
                                           fontWeight: FontWeight.w400),
                                       lableStyle: juraTextStyle(
-                                          color: AppColors.black.withOpacity(0.1),
+                                          color:
+                                              AppColors.black.withOpacity(0.1),
                                           fontSize: h * 0.02,
                                           fontWeight: FontWeight.w400),
                                       textstyle: juraTextStyle(
@@ -199,49 +211,61 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
                                           fontSize: h * 0.02,
                                           fontWeight: FontWeight.w400),
                                       titletextstyle: juraTextStyle(
-                                          color: AppColors.black.withOpacity(0.1),
+                                          color:
+                                              AppColors.black.withOpacity(0.1),
                                           fontSize: h * 0.02,
                                           fontWeight: FontWeight.w400),
                                       hintStyle: juraTextStyle(
-                                          color: AppColors.black.withOpacity(0.3),
+                                          color:
+                                              AppColors.black.withOpacity(0.3),
                                           fontSize: h * 0.02,
                                           fontWeight: FontWeight.w400),
-                                      controller: controller().currentPasswordController,
+                                      controller: controller()
+                                          .currentPasswordController,
                                       keyboardType: TextInputType.text,
                                       containerwidth: w,
                                       boxShadow: [
                                         BoxShadow(
-                                          color: AppColors.black.withOpacity(0.2),
+                                          color:
+                                              AppColors.black.withOpacity(0.2),
                                           blurRadius: h * 0.1,
                                           blurStyle: BlurStyle.inner,
                                         )
                                       ],
                                       containercolor:
-                                      AppColors.white.withOpacity(0.6),
-                                      textCapitalization: TextCapitalization.none,
+                                          AppColors.white.withOpacity(0.6),
+                                      textCapitalization:
+                                          TextCapitalization.none,
                                       borderRadius: BorderRadius.circular(10),
                                       underline: false,
                                     ),
                                   ),
                                   Padding(
-                                    padding:
-                                    EdgeInsets.symmetric(vertical: h * 0.01),
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: h * 0.01),
                                     child: TextInputField(
                                       hintText: AppText.enterNewPassword,
                                       counterStyle: juraTextStyle(
-                                          color: AppColors.black.withOpacity(0.1),
+                                          color:
+                                              AppColors.black.withOpacity(0.1),
                                           fontSize: h * 0.02,
                                           fontWeight: FontWeight.w400),
                                       errorText: controller().isSubmit == true
                                           ? validateConfirmPassword(
-                                          controller().newPasswordController.text, controller().currentPasswordController.text)
+                                              controller()
+                                                  .newPasswordController
+                                                  .text,
+                                              controller()
+                                                  .currentPasswordController
+                                                  .text)
                                           : null,
                                       errorStyle: juraTextStyle(
                                           color: AppColors.red,
                                           fontSize: h * 0.02,
                                           fontWeight: FontWeight.w400),
                                       lableStyle: juraTextStyle(
-                                          color: AppColors.black.withOpacity(0.1),
+                                          color:
+                                              AppColors.black.withOpacity(0.1),
                                           fontSize: h * 0.02,
                                           fontWeight: FontWeight.w400),
                                       textstyle: juraTextStyle(
@@ -249,26 +273,31 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
                                           fontSize: h * 0.02,
                                           fontWeight: FontWeight.w400),
                                       titletextstyle: juraTextStyle(
-                                          color: AppColors.black.withOpacity(0.1),
+                                          color:
+                                              AppColors.black.withOpacity(0.1),
                                           fontSize: h * 0.02,
                                           fontWeight: FontWeight.w400),
                                       hintStyle: juraTextStyle(
-                                          color: AppColors.black.withOpacity(0.3),
+                                          color:
+                                              AppColors.black.withOpacity(0.3),
                                           fontSize: h * 0.02,
                                           fontWeight: FontWeight.w400),
-                                      controller: controller().newPasswordController,
+                                      controller:
+                                          controller().newPasswordController,
                                       keyboardType: TextInputType.text,
                                       containerwidth: w,
                                       boxShadow: [
                                         BoxShadow(
-                                          color: AppColors.black.withOpacity(0.2),
+                                          color:
+                                              AppColors.black.withOpacity(0.2),
                                           blurRadius: h * 0.1,
                                           blurStyle: BlurStyle.inner,
                                         )
                                       ],
                                       containercolor:
-                                      AppColors.white.withOpacity(0.6),
-                                      textCapitalization: TextCapitalization.none,
+                                          AppColors.white.withOpacity(0.6),
+                                      textCapitalization:
+                                          TextCapitalization.none,
                                       borderRadius: BorderRadius.circular(10),
                                       underline: false,
                                     ),
@@ -281,12 +310,12 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
                                         containerwidth: w * 0.4,
                                         containerheight: h * 0.05,
                                         shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(h * 0.015)),
+                                            borderRadius: BorderRadius.circular(
+                                                h * 0.015)),
                                         text: AppText.done,
                                         decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(h * 0.005),
+                                            borderRadius: BorderRadius.circular(
+                                                h * 0.005),
                                             boxShadow: [
                                               BoxShadow(
                                                 color: AppColors.black
@@ -302,9 +331,8 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
                                           fontSize: h * 0.02,
                                           fontWeight: FontWeight.w600,
                                         ),
-                                        onPressed: () async  {
+                                        onPressed: () async {
                                           await controller().onDoneTap();
-                                          Navigator.pop(context);
                                         }),
                                   ),
                                 ],

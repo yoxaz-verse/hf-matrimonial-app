@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:heavenlymatrimony/application/account/account_service.dart';
-import 'package:heavenlymatrimony/application/otp/otp_service.dart';
 import 'package:heavenlymatrimony/data/shared_pref/shared_pref.dart';
+import 'package:heavenlymatrimony/utils/globals.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../application/dialog/dialog_service.dart';
@@ -41,18 +41,22 @@ class PasswordResScreenController extends _$PasswordResScreenController {
 
   Future<void> onDoneTap() async {
     Map<String, dynamic>? resetPasswordResponse =
-    await ref.read(accountServiceProvider).updatePassword(
-      email: emailIdController.text,
-      newpassword: newPasswordController.text,
-      password: currentPasswordController.text,
-      authtoken: authToken,
-    );
+        await ref.read(accountServiceProvider).updatePassword(
+              email: emailIdController.text,
+              newpassword: newPasswordController.text,
+              password: currentPasswordController.text,
+              authtoken: authToken,
+            );
     if (resetPasswordResponse?["data"] != null) {
-      DialogServiceV1().showSnackBar(content: "Password Reset Successfully!!!",
+      DialogServiceV1().showSnackBar(
+          content: "Password Reset Successfully!!!",
           color: AppColors.black,
           textclr: AppColors.white);
+      Navigator.pop(Globals.navigatorKey.currentContext!);
+    } else if (resetPasswordResponse?["error"] != null) {
     } else {
-      DialogServiceV1().showSnackBar(content: "Something went wrong...!",
+      DialogServiceV1().showSnackBar(
+          content: "Something went wrong...!",
           color: AppColors.red,
           textclr: AppColors.white);
     }

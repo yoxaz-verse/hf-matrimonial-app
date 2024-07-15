@@ -38,9 +38,9 @@ abstract class AccountRepository {
     required bool isGoogle,
     required bool isFacebook,
     required String gender,
-
   });
-  Future<Map<String, dynamic>?> getAllAccountDetailsByLogin({required String authtoken});
+  Future<Map<String, dynamic>?> getAllAccountDetailsByLogin(
+      {required String authtoken});
   Future<Map<String, dynamic>?> logOut({required String authtoken});
 
   Future<Map<String, dynamic>?> updateAccount({
@@ -103,7 +103,6 @@ class AccountRepositoryV1 extends AccountRepository {
     );
   }
 
-
   @override
   Future<Map<String, dynamic>?> applyForVerification({
     required String authtoken,
@@ -116,14 +115,18 @@ class AccountRepositoryV1 extends AccountRepository {
       builder: (data) {
         Map<String, dynamic> jsonMap = json.decode(data);
         if (jsonMap['success'] == true) {
-          DialogServiceV1().showSnackBar(content: "Verification request sent successfully", color: AppColors.black, textclr: AppColors.white);
+          DialogServiceV1().showSnackBar(
+              content: "Verification request sent successfully",
+              color: AppColors.black,
+              textclr: AppColors.white);
           return jsonMap;
         } else {
-          return {"data":null};
+          return {"data": null};
         }
       },
     );
   }
+
   @override
   Future<Map<String, dynamic>?> registerWithSocial({
     required String name,
@@ -132,7 +135,6 @@ class AccountRepositoryV1 extends AccountRepository {
     required bool isGoogle,
     required bool isFacebook,
     required String gender,
-
   }) async {
     try {
       final body = {
@@ -141,7 +143,7 @@ class AccountRepositoryV1 extends AccountRepository {
         "phoneNumber": phoneNo,
         "isGoogle": isGoogle,
         "isFacebook": isFacebook,
-        "Gender":gender
+        "Gender": gender
       };
       return api.postData(
         uri: Uri.parse(ApiConfig.signupSocialAccount),
@@ -158,12 +160,13 @@ class AccountRepositoryV1 extends AccountRepository {
             return jsonMap;
           } else if (jsonMap['error'] != null || jsonMap['message'] != null) {
             DialogServiceV1().showSnackBar(
-                content: jsonMap['error']??jsonMap['message']??"Server Error",
+                content:
+                    jsonMap['error'] ?? jsonMap['message'] ?? "Server Error",
                 color: AppColors.colorPrimary..withOpacity(0.7),
                 textclr: AppColors.white);
             return jsonMap;
           } else {
-            return {"data":null};
+            return {"data": null};
             return jsonMap;
           }
         },
@@ -244,8 +247,11 @@ class AccountRepositoryV1 extends AccountRepository {
         }
       },
     );
-  }  @override
-  Future<Map<String, dynamic>?> getAllAccountDetailsByLogin({required String authtoken}) {
+  }
+
+  @override
+  Future<Map<String, dynamic>?> getAllAccountDetailsByLogin(
+      {required String authtoken}) {
     return api.getData(
       uri: Uri.parse(ApiConfig.getAllAccountDetailsByLogin),
       headers: api.createHeaders(authtoken: authtoken),
@@ -254,15 +260,19 @@ class AccountRepositoryV1 extends AccountRepository {
         if (jsonMap["data"] != null) {
           return jsonMap;
         } else {
-          DialogServiceV1().showSnackBar(content: jsonMap["errror"], color: AppColors.black, textclr: AppColors.white);
-          return {"data":null};
+          DialogServiceV1().showSnackBar(
+              content: jsonMap["errror"],
+              color: AppColors.black,
+              textclr: AppColors.white);
+          return {"data": null};
           throw Exception('Failed..');
         }
       },
     );
   }
+
   @override
-  Future<Map<String, dynamic>?> logOut({required String authtoken}){
+  Future<Map<String, dynamic>?> logOut({required String authtoken}) {
     return api.postData(
       body: {},
       uri: Uri.parse(ApiConfig.logOutAccount),
@@ -302,11 +312,11 @@ class AccountRepositoryV1 extends AccountRepository {
     await googleSignIn.signOut();
 
     final GoogleSignInAccount? googleSignInAccount =
-    await googleSignIn.signIn();
+        await googleSignIn.signIn();
 
     if (googleSignInAccount != null) {
       final GoogleSignInAuthentication googleSignInAuthentication =
-      await googleSignInAccount.authentication;
+          await googleSignInAccount.authentication;
 
       final AuthCredential authCredential = GoogleAuthProvider.credential(
           idToken: googleSignInAuthentication.idToken,
@@ -358,11 +368,10 @@ class AccountRepositoryV1 extends AccountRepository {
   @override
   Future<Map<String, dynamic>?> loginWithSocial({
     required String email,
-
   }) async {
     try {
       final body = {
-       'email': email,
+        'email': email,
       };
       return api.postData(
         uri: Uri.parse(ApiConfig.loginSocialAccount),
@@ -378,24 +387,27 @@ class AccountRepositoryV1 extends AccountRepository {
                 textclr: AppColors.white);
             PreferenceManagerUtils.setIsLogin(true);
             PreferenceManagerUtils.setToken(jsonMap["data"]['token']);
-            PreferenceManagerUtils.setProfileId(
-                (jsonMap["data"]["Account"]["acc_Id"]?? jsonMap["data"]["Account"]["acc_id"]??"").toString());
-            PreferenceManagerUtils.setProfMobileNo(jsonMap["data"]
-            ["Account"]["userId"]["phoneNumber"]);
+            PreferenceManagerUtils.setProfileId((jsonMap["data"]["Account"]
+                        ["acc_Id"] ??
+                    jsonMap["data"]["Account"]["acc_id"] ??
+                    "")
+                .toString());
+            PreferenceManagerUtils.setProfMobileNo(
+                jsonMap["data"]["Account"]["userId"]["phoneNumber"]);
             PreferenceManagerUtils.setUserName(
                 jsonMap["data"]["Account"]["name"]);
             PreferenceManagerUtils.setProfEmail(
                 jsonMap["data"]["Account"]["email"]);
             PreferenceManagerUtils.setUserId(jsonMap["data"]['Account']['_id']);
             return jsonMap;
-          }else if (jsonMap['error'] != null) {
+          } else if (jsonMap['error'] != null) {
             DialogServiceV1().showSnackBar(
                 content: "${jsonMap["error"]}",
                 color: AppColors.colorPrimary.withOpacity(0.7),
                 textclr: AppColors.white);
             return jsonMap;
           } else {
-            return {"data":null};
+            return {"data": null};
             // throw Exception('Failed..');
           }
         },
@@ -407,6 +419,7 @@ class AccountRepositoryV1 extends AccountRepository {
       return null;
     }
   }
+
   @override
   Future<Map<String, dynamic>?> updateAccount(
       {required String name, required String authtoken}) {
@@ -471,19 +484,12 @@ class AccountRepositoryV1 extends AccountRepository {
       body: body,
       builder: (data) {
         Map<String, dynamic> jsonMap = json.decode(data);
+        print("jsonMapjsonMap restpass=-=-= $jsonMap");
         if (jsonMap["success"] == true) {
           return jsonMap;
         } else if (jsonMap["error"] != null) {
-          DialogServiceV1().showSnackBar(
-              content: "${jsonMap["error"]}",
-              color: AppColors.black,
-              textclr: AppColors.white);
-          return {"data": null};
+          return jsonMap;
         } else if (jsonMap["message"] != null) {
-          DialogServiceV1().showSnackBar(
-              content: "${jsonMap["message"]}",
-              color: AppColors.black,
-              textclr: AppColors.white);
           return {"data": null};
         } else {
           throw Exception('Failed..');
@@ -503,20 +509,27 @@ class AccountRepositoryV1 extends AccountRepository {
       body: body,
       builder: (data) {
         Map<String, dynamic> jsonMap = json.decode(data);
+        print("jsonMapjsonMapforgot restpass=-=-= $jsonMap");
         if (jsonMap["success"] == true) {
+          return jsonMap;
+        } else if (jsonMap["error"] != null) {
           DialogServiceV1().showSnackBar(
-              content: "Password changed successfully",
+              content: "${jsonMap["error"]}",
               color: AppColors.black,
               textclr: AppColors.white);
           return jsonMap;
-        } else {
+        } else if (jsonMap["message"] != null) {
+          DialogServiceV1().showSnackBar(
+              content: "${jsonMap["message"]}",
+              color: AppColors.black,
+              textclr: AppColors.white);
           return {"data": null};
+        } else {
           throw Exception('Failed..');
         }
       },
     );
   }
-
 
   @override
   Future<UserCredential?> signInWithFacebook() async {
@@ -527,7 +540,7 @@ class AccountRepositoryV1 extends AccountRepository {
     User user;
     if (result.status == LoginStatus.success) {
       final OAuthCredential credential =
-      FacebookAuthProvider.credential(result.accessToken!.token);
+          FacebookAuthProvider.credential(result.accessToken!.token);
 
       return await FirebaseAuth.instance.signInWithCredential(credential);
     }
@@ -539,6 +552,7 @@ class AccountRepositoryV1 extends AccountRepository {
     await FacebookAuth.instance.logOut();
     return null;
   }
+
   @override
   Future<Map<String, dynamic>?> deleteAccount({required String authtoken}) {
     return api.deleteData(
@@ -548,31 +562,28 @@ class AccountRepositoryV1 extends AccountRepository {
         Map<String, dynamic> jsonMap = json.decode(data);
         if (jsonMap["data"] != null) {
           return jsonMap;
-        } else if(jsonMap["error"] != null) {
+        } else if (jsonMap["error"] != null) {
           DialogServiceV1().showSnackBar(
               content: "${jsonMap["error"]}",
               color: AppColors.black,
               textclr: AppColors.white);
           return jsonMap;
-        }else if(jsonMap["message"] != null) {
+        } else if (jsonMap["message"] != null) {
           DialogServiceV1().showSnackBar(
               content: "${jsonMap["message"]}",
               color: AppColors.black,
               textclr: AppColors.white);
           return jsonMap;
-
         } else {
-        DialogServiceV1().showSnackBar(
-            content: "Server Error",
-            color: AppColors.black,
-            textclr: AppColors.white);
-        return jsonMap;
-
+          DialogServiceV1().showSnackBar(
+              content: "Server Error",
+              color: AppColors.black,
+              textclr: AppColors.white);
+          return jsonMap;
         }
       },
     );
   }
-
 }
 
 final accountRepositoryProvider =
